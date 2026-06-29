@@ -21,7 +21,7 @@ export const OAuthDebug: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/debug');
+      const res = await fetch('/api/auth/debug');
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
