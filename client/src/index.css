@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  
+  /* Theme tokens mapped to Tailwind colors */
+  --color-bg-app: var(--bg-app);
+  --color-bg-card: var(--bg-card);
+  --color-border-card: var(--border-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-hover-bg: var(--hover-bg);
+  --color-input-bg: var(--input-bg);
+  --color-chart-grid: var(--chart-grid);
+}
+
+:root, [data-theme="dark"] {
+  --bg-app: #050816;
+  --bg-card: #0B1120;
+  --border-card: #1E293B;
+  --border-glow: rgba(0, 240, 255, 0.2);
+  --text-primary: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --hover-bg: #0F172A;
+  --input-bg: rgba(255,255,255,0.05);
+  --chart-grid: rgba(255,255,255,0.08);
+  
+  /* Sidebar Tokens */
+  --sidebar-hover-bg: rgba(14, 165, 233, 0.12);
+  --sidebar-hover-text: #FFFFFF;
+  --sidebar-hover-icon: #22D3EE;
+  --sidebar-hover-border: transparent;
+  
+  --sidebar-active-bg: rgba(0, 240, 255, 0.12);
+  --sidebar-active-text: #00f0ff;
+  --sidebar-active-icon: #00f0ff;
+  --sidebar-active-border: rgba(0, 240, 255, 0.3);
+  --sidebar-active-shadow: 0 0 12px rgba(0,240,255,0.15);
+  
+  --color-primary: #00f0ff; /* Neon Cyan */
+  --color-primary-glow: rgba(0, 240, 255, 0.12);
+  
+  --color-secondary: #ff6200; /* Neon Orange */
+  --color-secondary-glow: rgba(255, 98, 0, 0.12);
+
+  --color-success: #10b981; /* Emerald 500 */
+  --color-success-glow: rgba(16, 185, 129, 0.12);
+
+  --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.15);
+  --shadow-glow-orange: 0 0 20px rgba(255, 98, 0, 0.15);
+  
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg-app: #f1f3f6;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-card: rgba(203, 213, 225, 0.6);
+  --border-glow: rgba(14, 165, 233, 0.2);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  
+  --color-primary: #0ea5e9; /* Sky Blue */
+  --color-primary-glow: rgba(14, 165, 233, 0.1);
+  
+  --color-secondary: #ea580c; /* High-Visibility Orange */
+  --color-secondary-glow: rgba(234, 88, 12, 0.1);
+
+  --color-success: #059669; /* Emerald 600 */
+  --color-success-glow: rgba(5, 150, 105, 0.08);
+
+  --shadow-glow: 0 4px 20px rgba(14, 165, 233, 0.12);
+  --shadow-glow-orange: 0 4px 20px rgba(234, 88, 12, 0.12);
+  
+  color-scheme: light;
+}
+
+/* Global resets and body styling */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-card);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Base Glassmorphic Layout Components */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel-glow:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Shimmer/Skeleton loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--border-card) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    var(--border-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Typography styles */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #00ffff, #0088ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #ff8800, #ff3300);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Print Overrides */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* App root container fix */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Recharts Global Overrides (Fixes Tooltip UI Bugs & Focus Outlines)
+   ========================================================================== */
+
+/* 1. Remove unwanted large white focus borders around entire charts */
+.recharts-wrapper,
+.recharts-surface {
+  outline: none !important;
+}
+
+/* Only show outline for keyboard navigation */
+.recharts-wrapper:focus-visible,
+.recharts-surface:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+  border-radius: 8px;
+}
+
+/* 2. Hide the giant hover cursor overlay rectangle completely */
+.recharts-tooltip-cursor {
+  fill: transparent !important;
+  stroke: transparent !important;
+  opacity: 0 !important;
+}
+
+/* 3. Global Premium Zenwar Custom Tooltip Design */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+  transition: transform 0.15s ease-out !important; /* Smooth animation */
+}
+
+/* Override recharts inline styles with !important */
+.recharts-default-tooltip {
+  background-color: #0d0f1a !important; /* Dark solid base to avoid transparency bleed */
+  border: 1px solid var(--color-primary-glow) !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 10px var(--color-primary-glow) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-sans) !important;
+}
+
+/* Tooltip Title */
+.recharts-tooltip-label {
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+  color: var(--text-primary) !important;
+  font-size: 13px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  padding-bottom: 4px !important;
+}
+
+/* Tooltip Value Items */
+.recharts-tooltip-item {
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 2px 0 !important;
+  text-transform: capitalize !important;
+}
+
+.recharts-tooltip-item-name {
+  color: var(--text-secondary) !important;
+  margin-right: 8px !important;
+  font-weight: 500 !important;
+}
+
+.recharts-tooltip-item-value {
+  color: var(--color-primary) !important;
+  text-shadow: 0 0 8px var(--color-primary-glow) !important;
+}
+
+/* Sidebar Classes */
+.active-sidebar-item {
+  background-color: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+  border-color: var(--sidebar-active-border);
+  box-shadow: var(--sidebar-active-shadow);
+  border-left: var(--sidebar-active-left-border, 1px solid var(--sidebar-active-border));
+}
+
+.sidebar-icon-active {
+  color: var(--sidebar-active-icon);
+}
+
+.sidebar-icon-inactive {
+  color: var(--text-secondary);
+}
+
+.inactive-sidebar-item:hover {
+  background-color: var(--sidebar-hover-bg) !important;
+  color: var(--sidebar-hover-text) !important;
+  border-color: var(--sidebar-hover-border) !important;
+}
+
+.inactive-sidebar-item:hover .sidebar-icon-inactive {
+  color: var(--sidebar-hover-icon) !important;
+}
